@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center my-4">
+    <h2>Your IT Assets</h2>
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('create_itasset') }}" class="btn btn-primary">Add New IT Asset</a>
+    {% endif %}
+</div>
+{% if itassets %}
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Purchase Date</th>
+                {% if current_user.is_authenticated %}
+                    <th scope="col" class="text-end">Actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for asset in itassets %}
+                <tr>
+                    <td>{{ asset.name }}</td>
+                    <td>{{ asset.description }}</td>
+                    <td>{{ asset.purchase_date.strftime('%Y-%m-%d') }}</td>
+                    {% if current_user.is_authenticated %}
+                        <td class="text-end">
+                            {% if asset.user == current_user or current_user.role == 'admin' %}
+                                <a href="{{ url_for('update_itasset', itasset_id=asset.id) }}" class="btn btn-warning btn-sm me-2">Edit</a>
+                            {% endif %}
+                            {% if current_user.role == 'admin' %}
+                                <form action="{{ url_for('delete_itasset', itasset_id=asset.id) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this asset?');">Delete</button>
+                                </form>
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="text-muted">No IT assets found.</p>
+{% endif %}
+{% endblock %}
