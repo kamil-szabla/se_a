@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
-    password = db.Column(db.String(60), nullable=False)
+    password = db.Column(db.String(200), nullable=False)
     role = db.Column(db.String(10), nullable=False, default='user')
     devices = db.relationship('Device', foreign_keys='Device.assignee_id', back_populates='assignee', lazy=True)
 
