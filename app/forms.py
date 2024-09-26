@@ -28,6 +28,8 @@ def password_strength_check(form, field):
 
 
 class RegistrationForm(FlaskForm):
+    name = StringField('First Name', validators=[DataRequired(), Length(min=2, max=50)])
+    surname = StringField('Last Name', validators=[DataRequired(), Length(min=2, max=50)])
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired(), password_strength_check])
