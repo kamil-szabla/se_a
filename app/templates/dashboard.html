@@ -1,0 +1,74 @@
+{#{% extends "base.html" %}#}
+{#{% block content %}#}
+{#<h2 class="mt-4">Device Dashboard</h2>#}
+{##}
+{#<!-- Device Filter Form -->#}
+{#<div class="card mb-4">#}
+{#    <div class="card-header">#}
+{#        <h5 class="mb-0">Filter Devices</h5>#}
+{#    </div>#}
+{#    <div class="card-body">#}
+{#        <form method="GET" action="{{ url_for('devices.dashboard') }}" class="mb-4">#}
+{#            <div class="form-row">#}
+{#                <div class="form-group col-md-3">#}
+{#                    <label for="manufacturer">Manufacturer</label>#}
+{#                    <input type="text" name="manufacturer" id="manufacturer" class="form-control" placeholder="Manufacturer">#}
+{#                </div>#}
+{#                <div class="form-group col-md-3">#}
+{#                    <label for="model">Model</label>#}
+{#                    <input type="text" name="model" id="model" class="form-control" placeholder="Model">#}
+{#                </div>#}
+{#                <div class="form-group col-md-3">#}
+{#                    <label for="status">Status</label>#}
+{#                    <select name="status" id="status" class="form-control">#}
+{#                        <option value="">Any Status</option>#}
+{#                        <option value="active">Active</option>#}
+{#                        <option value="inactive">Inactive</option>#}
+{#                    </select>#}
+{#                </div>#}
+{#                <div class="form-group col-md-3 align-self-end">#}
+{#                    <button type="submit" class="btn btn-primary btn-block">Filter</button>#}
+{#                </div>#}
+{#            </div>#}
+{#        </form>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{##}
+{#<!-- Device Table -->#}
+{#<table class="table table-striped">#}
+{#    <thead>#}
+{#        <tr>#}
+{#            <th>Manufacturer</th>#}
+{#            <th>Model</th>#}
+{#            <th>Firmware Version</th>#}
+{#            <th>Assignee</th>#}
+{#            <th>Location</th>#}
+{#            <th>Status</th>#}
+{#            <th>Actions</th>#}
+{#        </tr>#}
+{#    </thead>#}
+{#    <tbody>#}
+{#        {% for device in devices %}#}
+{#        <tr>#}
+{#            <td>{{ device.manufacturer }}</td>#}
+{#            <td>{{ device.model }}</td>#}
+{#            <td>{{ device.firmware_version }}</td>#}
+{#            <td>{{ device.assignee or 'Unassigned' }}</td>#}
+{#            <td>{{ device.location }}</td>#}
+{#            <td>{{ device.status }}</td>#}
+{#            <td>#}
+{#                <a href="{{ url_for('devices.device_details', device_id=device.id) }}" class="btn btn-info btn-sm">Viewww</a>#}
+{#                {% if current_user.is_authenticated and current_user.is_admin %}#}
+{#                    <a href="{{ url_for('devices.delete_device', device_id=device.id) }}" class="btn btn-danger">Delete</a>#}
+{#                {% endif %}#}
+{#            </td>#}
+{#        </tr>#}
+{#        {% else %}#}
+{#        <tr>#}
+{#            <td colspan="7" class="text-center">No devices found.</td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#    </tbody>#}
+{#</table>#}
+{#{% endblock %}#}

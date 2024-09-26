@@ -1,10 +1,9 @@
-from flask.cli import with_appcontext
 import click
-from app import app, db
+from flask.cli import with_appcontext
 from app.models import User
-from werkzeug.security import generate_password_hash
+from app import db
 
-@app.cli.command("create-admin")
+@click.command('create-admin')
 @with_appcontext
 def create_admin():
     """Create an admin user."""
@@ -30,3 +29,4 @@ def create_admin():
     db.session.add(admin_user)
     db.session.commit()
     click.echo(f"Admin user '{username}' created successfully.")
+

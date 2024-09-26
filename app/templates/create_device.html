@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">{{ title }}</h2>
+    <form method="POST" action="">
+        {{ device_form.hidden_tag() }}
+
+        <!-- Device Information Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Device Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ device_form.manufacturer.label(class="form-label") }}
+                        {{ device_form.manufacturer(class="form-control") }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{ device_form.model.label(class="form-label") }}
+                        {{ device_form.model(class="form-control") }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ device_form.prod_year.label(class="form-label") }}
+                        {{ device_form.prod_year(class="form-control") }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{ device_form.dtid.label(class="form-label") }}
+                        {{ device_form.dtid(class="form-control") }}
+                        {% if device_form.dtid.errors %}
+                            <div class="text-danger">
+                                {{ device_form.dtid.errors[0] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ device_form.location.label(class="form-label") }}
+                    {{ device_form.location(class="form-control") }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Firmware and OS Information Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Firmware and OS Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ device_form.firmware_version.label(class="form-label") }}
+                        {{ device_form.firmware_version(class="form-control") }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{ device_form.last_fw_update.label(class="form-label") }}
+                        {{ device_form.last_fw_update(class="form-control", type="date") }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ device_form.os_version.label(class="form-label") }}
+                    {{ device_form.os_version(class="form-control") }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Issues and Tickets Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Issues and Tickets</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    {{ device_form.known_issues.label(class="form-label") }}
+                    {{ device_form.known_issues(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ device_form.related_tickets.label(class="form-label") }}
+                    {{ device_form.related_tickets(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ device_form.other_details.label(class="form-label") }}
+                    {{ device_form.other_details(class="form-control") }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Assignment and Status Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Assignment and Status</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ device_form.assignee.label(class="form-label") }}
+                        {{ device_form.assignee(class="form-control") }}
+                        {% if device_form.assignee.errors %}
+                            <div class="text-danger">
+                                {{ device_form.assignee.errors[0] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{ device_form.status.label(class="form-label") }}
+                        {{ device_form.status(class="form-control") }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+</div>
+{% endblock %}

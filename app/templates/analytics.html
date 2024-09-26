@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mt-4">Device Usage Analytics</h2>
+
+<!-- Device Usage Count -->
+<h3>Device Usage Count</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Device Model</th>
+            <th>Usage Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for model, usage_count in device_usage %}
+        <tr>
+            <td>{{ model }}</td>
+            <td>{{ usage_count }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="2" class="text-center">No usage data available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Time Spent Per Device -->
+<h3>Time Spent Per Device (in days)</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Device Model</th>
+            <th>Total Time Used</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for model, time_spent in time_spent_per_device %}
+        <tr>
+            <td>{{ model }}</td>
+            <td>{{ time_spent | round(2) }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="2" class="text-center">No time usage data available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
