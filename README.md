@@ -45,7 +45,7 @@ The database consists of two key tables: **Users** and **Devices**. The **ERD** 
 ### Steps to Run Locally
 1. **Clone the Repository**:
    ```bash
-   git clone [https://github.com/username/repository.git](https://github.com/kamil-szabla/se_a.git)
+   git clone https://github.com/kamil-szabla/se_a.git
    cd se_a
    ```
 2. Create and Activate Virtual Environment:
